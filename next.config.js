@@ -1,10 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    output: 'export'
+    output: "export",
+    experimental: {
+        // The Rust based compiler doesn't support plugins yet.
+        mdxRs: false,
+    },
+};
+
+if (process.env.GITHUB_ACTIONS) {
+    nextConfig.basePath = "/blog";
 }
 
-if (process.env.NODE_ENV === 'production') {
-    nextConfig.basePath = "/blog"
-}
-
-module.exports = nextConfig
+const withMDX = require("@next/mdx")({
+    options: {
+        remarkPlugins: [require("remark-prism")],
+    }
+});
+module.exports = withMDX(nextConfig);
