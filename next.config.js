@@ -4,7 +4,7 @@ const nextConfig = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-    nextConfig.basePath = "https://tobias-tengler.github.io/blog"
+    nextConfig.basePath = "/blog"
 }
 
 module.exports = nextConfig
