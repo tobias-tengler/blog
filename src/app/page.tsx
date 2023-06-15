@@ -1,9 +1,19 @@
-import Example from "./example.mdx";
+import { getAllBlogSlugs } from "@/app/blogHelpers";
+import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const slugs = await getAllBlogSlugs();
+
   return (
-    <div className="px-40 py-4">
-      <Example />
+    <div className="p-4">
+      Posts:
+      <ul>
+        {slugs.map((slug) => (
+          <li key={slug}>
+            <Link href={"/" + slug}>{slug}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
