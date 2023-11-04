@@ -1,4 +1,4 @@
-import { getAllBlogSlugs } from "@/app/blogHelpers";
+import { getAllBlogSlugs } from "./blogHelpers";
 import Link from "next/link";
 
 export default async function Home() {
