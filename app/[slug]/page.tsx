@@ -6,7 +6,6 @@ import "./atom-one-dark-reasonable.css";
 
 const options = {
   mdxOptions: {
-    // remarkPlugins: [],
     rehypePlugins: [rehypeHighlight],
   },
 } as const;
@@ -29,8 +28,12 @@ export default async function BlogPage({ params }: Props) {
     <div>
       Blog page for {params.slug}:
       <div>
-        <MDXRemote components={components} source={content} options={options} />
-        {/* { mdxOptions: { rehypePlugins: [rehypeHighlight] } }} /> */}
+        <MDXRemote
+          components={components}
+          source={content}
+          // @ts-expect-error
+          options={options}
+        />
       </div>
     </div>
   );
@@ -48,7 +51,7 @@ function useMDXComponents(): MDXComponents {
     ),
     img: ({ src, alt }) => {
       // TODO: This has really bad layout shift
-      return <img src={src} alt={alt} />;
+      return <Image src={src} alt={alt} />;
     },
     ul: ({ children }) => {
       return <ul>{children}</ul>;
